@@ -11,14 +11,22 @@ Task: Implement a basic hash table without collision resolution.
    Recommend either of:
 
    * DJB2
-   * FNV-1 (64-bit)
+   * [x] - FNV-1 (64-bit)
 
    You are allowed to Google for these hashing functions and implement
    from psuedocode.
 
-3. Implement the `hash_index()` that returns an index value for a key.
+3. [x] - Implement the `hash_index()` that returns an index value for a key.
 
-4. Implement the `put()`, `get()`, and `delete()` methods.
+4. [x] - Implement the `put()`, `get()`, and `delete()` methods.
+
+```
+Notes:
+Three rules for Hash functions --
+1. A hash function must be consistent (deterministic). Every time it receives the same input (like "aqua"), it must return the same output (like 4). If it’s not deterministic, it is not a hash function.
+2. Different input data should return different numbers. For example, if the input "aqua" returns 4, then the input "beige" should not return 4.
+3. A hash function must return numbers that are within a specific range.
+```
 
 You can test this with:
 

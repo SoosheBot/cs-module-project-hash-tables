@@ -14,14 +14,16 @@ MIN_CAPACITY = 8
 
 class HashTable:
     """
-    A hash table that with `capacity` buckets
+    A hash table with `capacity` buckets
     that accepts string keys
 
     Implement this.
     """
 
     def __init__(self, capacity):
-        # Your code here
+        self.capacity = capacity
+        #storage buckets for the capacity
+        self.storage = [None] * self.capacity
 
 
     def get_num_slots(self):
@@ -34,8 +36,9 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        #the self.storage 'buckets' are going to hold the hash, need to return len() of them to returns the number of items/characters
 
+        return len(self.storage)
 
     def get_load_factor(self):
         """
@@ -44,7 +47,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        
 
     def fnv1(self, key):
         """
@@ -53,8 +56,23 @@ class HashTable:
         Implement this, and/or DJB2.
         """
 
-        # Your code here
+        #FNV-1 Hash pseudocode from Wikipedia
+        # algorithm fnv-1 is
+        # hash := FNV_offset_basis do
+        # for each byte_of_data to be hashed
+            # hash := hash × FNV_prime
+            # hash := hash XOR byte_of_data
+        # return hash 
+        
+        FNV_offset_basis =  14695981039346656037
+        FNV_prime = 1099511628211
 
+        hash = FNV_offset_basis
+        # encode strings into bytes representation with the .encode() -- from the TK
+        for x in key.encode(): #loop
+            hash = hash * FNV_prime
+            hash = hash ^ x
+        return hash
 
     def djb2(self, key):
         """
@@ -62,16 +80,16 @@ class HashTable:
 
         Implement this, and/or FNV-1.
         """
-        # Your code here
-
+        # Your code here 
+        
 
     def hash_index(self, key):
         """
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        #return self.fnv1(key) % self.capacity
-        return self.djb2(key) % self.capacity
+        return self.fnv1(key) % self.capacity
+        # return self.djb2(key) % self.capacity
 
     def put(self, key, value):
         """
@@ -81,8 +99,10 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
+        #sets index equal to the hash_index function's key
+        index = self.hash_index(key)
+        #self.storage at the index-th position = the Linked List hash table key/value pair
+        self.storage[index] = HashTableEntry(key, value)
 
     def delete(self, key):
         """
@@ -93,7 +113,8 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        
+        self.put(key, None)
 
     def get(self, key):
         """
@@ -104,7 +125,11 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        index = self.hash_index(key)
+        if self.storage[index] is not None:
+            return self.storage[index].value
+        else:
+            return None
 
     def resize(self, new_capacity):
         """
