@@ -1,7 +1,3 @@
-# Use frequency analysis to find the key to ciphertext.txt, and then
-# decode it.
-
-# $%$Start
 import string
 
 alphabet = [
@@ -33,7 +29,7 @@ alphabet = [
     "Z",
 ]
 
-# Frequency Analysis
+# Analyze frequency
 
 freq = {}
 total_chars = 0
@@ -47,10 +43,10 @@ with open("/Users/Mahadevi/Documents/CS7/hash-tables/cs-module-project-hash-tabl
             if char in string.ascii_uppercase:
                 if char not in freq:
                     freq[char] = 0
-                # add one to frequency numeric for each time that char appears and then increase total # of chars seen
+                # add one to frequency numeric counter for each time that char appears and then increase total # of chars seen
                 freq[char] += 1
                 total_chars += 1
-        # add to ciphertext string sequence for analyzing in next step
+        # add to ciphertext string sequence for next step
         ciphertext += line  # Save for decoding later
 
 # Sort by descending frequency
