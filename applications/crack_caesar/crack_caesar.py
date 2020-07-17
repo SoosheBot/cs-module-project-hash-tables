@@ -53,23 +53,16 @@ with open("/Users/Mahadevi/Documents/CS7/hash-tables/cs-module-project-hash-tabl
         # add to ciphertext string sequence for analyzing in next step
         ciphertext += line  # Save for decoding later
 
-# Compute the percentage frequency. (Technically we don't need to do
-# this because we're just going to sort it later, and we can do that by
-# either frequency or total letter count.)
-for c in freq:
-    freq[c] /= total_chars
-    freq[c] *= 100
-
 # Sort by descending frequency
 freq_items = list(freq.items())
-# This will allow freq items to be sorted from highest to lowest frequency
+# This will allow freq_items to be sorted from highest to lowest frequency
 freq_items.sort(key=lambda e: e[1], reverse=True)
 
 print("FREQ ITEMS holding frequency list of tuples!!", freq_items, end="\n\n\n")
 
 # Make the key
 decode_key = {}
-# decode_key will equate first value which is the freq_items to the alphabet
+# decode_key will equate first value (freq_items) to the alphabet
 for i in range(26):
     decode_key[freq_items[i][0]] = alphabet[i]
 
@@ -79,7 +72,7 @@ print("Decode KEY!", decode_key, end="\n\n\n")
 # Decode the text
 for c in ciphertext:
     if c in decode_key:
-        # this will loop through ciphertext and if the key is in the decode key dictionary it will print the value held at that key thereby deciphering
+        # this will loop through ciphertext and if the key is in the decode key dictionary, print the value held at that key -- de...ciphering
         print(decode_key[c], end="")
     else:  # print punctuation and spaces etc
         print(c, end="")
