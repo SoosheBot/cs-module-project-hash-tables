@@ -39,7 +39,7 @@ for _ in range(5):
 
     while not stopped:
         print(w, end=" ")
-        # condition of dog? at end of sentence or someting like dogs!" word longer than 1 element
+        # condition of ? at end of sentence or someting like !" or any word longer than 1 element
         if w[-1] in punctuation_marks or len(w) > 1 and w[-2] in punctuation_marks:
             stopped = True
         else:
